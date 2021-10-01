@@ -5,11 +5,9 @@ import cinema.entity.Seat;
 import cinema.entity.SeatInTheater;
 import cinema.entity.Theater;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -22,7 +20,7 @@ public class Controller {
 
 
     @PostMapping("purchase")
-    public Seat purchaseTicket(@RequestBody SeatInTheater seat){
+    public ResponseEntity<Seat> purchaseTicket(@RequestBody SeatInTheater seat){
         return seatDAO.purchaseTicket(seat);
     }
 

@@ -1,11 +1,10 @@
 package cinema.entity;
 
-public class ErrorSeat implements Seat {
-
-
+public class ErrorSeat implements Seat{
     private String error;
-    public ErrorSeat(){};
 
+    public ErrorSeat() {
+    }
 
     public ErrorSeat(String error) {
         this.error = error;

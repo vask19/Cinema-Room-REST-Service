@@ -1,96 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CinemaTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-09-27T16:16:00" hostname="HOME-PC" time="6.195">
+<testsuite name="CinemaTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-01T14:12:39" hostname="HOME-PC" time="4.954">
   <properties/>
-  <testcase name="start" classname="CinemaTests" time="6.195">
-    <failure message="java.lang.AssertionError: Wrong answer in test #4&#10;&#10;POST /purchase should respond with status code 400, responded: 200&#10;&#10;Response body:&#10;&#10;{&quot;error&quot;:&quot;The ticket has been already purchased!&quot;}&#10;&#10;Please find below the output of your program during this failed test.&#10;&#10;---&#10;&#10;.   ____          _            __ _ _&#10; /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \&#10;( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \&#10; \\/  ___)| |_)| | | | | || (_| |  ) ) ) )&#10;  '  |____| .__|_| |_|_| |_\__, | / / / /&#10; =========|_|==============|___/=/_/_/_/&#10; :: Spring Boot ::        (v2.3.1.RELEASE)&#10;&#10;2021-09-27 19:16:01.380  INFO 8980 --- [    Test worker] cinema.Main                              : Starting Main on HOME-PC with PID 8980 (started by vask in C:\Users\vask\IdeaProjects\Cinema Room REST Service\Cinema Room REST Service\task)&#10;2021-09-27 19:16:01.385  INFO 8980 --- [    Test worker] cinema.Main                              : No active profile set, falling back to default profiles: default&#10;2021-09-27 19:16:03.803  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)&#10;2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]&#10;2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]&#10;2021-09-27 19:16:03.998  INFO 8980 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext&#10;2021-09-27 19:16:04.001  INFO 8980 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2482 ms&#10;2021-09-27 19:16:04.506  INFO 8980 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'&#10;2021-09-27 19:16:05.008  INFO 8980 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'&#10;2021-09-27 19:16:05.109  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''&#10;2021-09-27 19:16:05.146  INFO 8980 --- [    Test worker] cinema.Main                              : Started Main in 4.475 seconds (JVM running for 5.867)&#10;2021-09-27 19:16:05.897  INFO 8980 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'&#10;2021-09-27 19:16:05.898  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'&#10;2021-09-27 19:16:05.915  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #4
-
-POST /purchase should respond with status code 400, responded: 200
-
-Response body:
-
-{&quot;error&quot;:&quot;The ticket has been already purchased!&quot;}
-
-Please find below the output of your program during this failed test.
-
----
-
-.   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::        (v2.3.1.RELEASE)
-
-2021-09-27 19:16:01.380  INFO 8980 --- [    Test worker] cinema.Main                              : Starting Main on HOME-PC with PID 8980 (started by vask in C:\Users\vask\IdeaProjects\Cinema Room REST Service\Cinema Room REST Service\task)
-2021-09-27 19:16:01.385  INFO 8980 --- [    Test worker] cinema.Main                              : No active profile set, falling back to default profiles: default
-2021-09-27 19:16:03.803  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-09-27 19:16:03.998  INFO 8980 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-09-27 19:16:04.001  INFO 8980 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2482 ms
-2021-09-27 19:16:04.506  INFO 8980 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-09-27 19:16:05.008  INFO 8980 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-2021-09-27 19:16:05.109  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-2021-09-27 19:16:05.146  INFO 8980 --- [    Test worker] cinema.Main                              : Started Main in 4.475 seconds (JVM running for 5.867)
-2021-09-27 19:16:05.897  INFO 8980 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-09-27 19:16:05.898  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-09-27 19:16:05.915  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
-	at org.junit.Assert.fail(Assert.java:89)
-	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:155)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
-	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
-	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:121)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:414)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
-	at java.base/java.lang.Thread.run(Thread.java:829)
-</failure>
-  </testcase>
+  <testcase name="start" classname="CinemaTests" time="4.954"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 
@@ -102,26 +13,28 @@ Start test 1?[0m
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.3.1.RELEASE)
 
-2021-09-27 19:16:01.380  INFO 8980 --- [    Test worker] cinema.Main                              : Starting Main on HOME-PC with PID 8980 (started by vask in C:\Users\vask\IdeaProjects\Cinema Room REST Service\Cinema Room REST Service\task)
-2021-09-27 19:16:01.385  INFO 8980 --- [    Test worker] cinema.Main                              : No active profile set, falling back to default profiles: default
-2021-09-27 19:16:03.803  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-09-27 19:16:03.827  INFO 8980 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-09-27 19:16:03.998  INFO 8980 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-09-27 19:16:04.001  INFO 8980 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2482 ms
-2021-09-27 19:16:04.506  INFO 8980 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-09-27 19:16:05.008  INFO 8980 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-2021-09-27 19:16:05.109  INFO 8980 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-2021-09-27 19:16:05.146  INFO 8980 --- [    Test worker] cinema.Main                              : Started Main in 4.475 seconds (JVM running for 5.867)
-2021-09-27 19:16:05.897  INFO 8980 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-09-27 19:16:05.898  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-09-27 19:16:05.915  INFO 8980 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
+2021-10-01 17:12:40.091  INFO 9064 --- [    Test worker] cinema.Main                              : Starting Main on HOME-PC with PID 9064 (started by vask in C:\Users\vask\IdeaProjects\Cinema Room REST Service\Cinema Room REST Service\task)
+2021-10-01 17:12:40.095  INFO 9064 --- [    Test worker] cinema.Main                              : No active profile set, falling back to default profiles: default
+2021-10-01 17:12:42.103  INFO 9064 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+2021-10-01 17:12:42.118  INFO 9064 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-10-01 17:12:42.118  INFO 9064 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-10-01 17:12:42.275  INFO 9064 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-10-01 17:12:42.275  INFO 9064 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2115 ms
+2021-10-01 17:12:42.697  INFO 9064 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-01 17:12:43.103  INFO 9064 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-10-01 17:12:43.173  INFO 9064 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+2021-10-01 17:12:43.192  INFO 9064 --- [    Test worker] cinema.Main                              : Started Main in 3.762 seconds (JVM running for 4.838)
+2021-10-01 17:12:43.744  INFO 9064 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-01 17:12:43.746  INFO 9064 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-10-01 17:12:43.759  INFO 9064 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
 ?[1;31m
 Start test 2?[0m
 ?[1;31m
 Start test 3?[0m
 ?[1;31m
 Start test 4?[0m
+?[1;31m
+Start test 5?[0m
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
