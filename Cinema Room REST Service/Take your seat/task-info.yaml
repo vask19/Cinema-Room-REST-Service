@@ -300,7 +300,7 @@ files:
 - name: src/cinema/dao/SeatDAO.java
   visible: true
   learner_created: true
-- name: src/cinema/entity/SeatInTheater.java
+- name: src/cinema/entity/Ticket.java
   visible: true
   text: |
     package cinema.entity;
@@ -348,4 +348,4 @@ status: Solved
 feedback:
   message: Congratulations!
   time: Fri, 01 Oct 2021 14:12:44 UTC
-record: -1
+record: 2

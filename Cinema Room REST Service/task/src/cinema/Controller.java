@@ -2,12 +2,15 @@ package cinema;
 
 import cinema.dao.SeatDAO;
 import cinema.entity.Seat;
-import cinema.entity.SeatInTheater;
+import cinema.entity.Ticket;
 import cinema.entity.Theater;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.UUID;
 
 
 @RestController
@@ -20,13 +23,19 @@ public class Controller {
 
 
     @PostMapping("purchase")
-    public ResponseEntity<Seat> purchaseTicket(@RequestBody SeatInTheater seat){
+    public ResponseEntity<Seat> purchaseTicket(@RequestBody Ticket seat){
         return seatDAO.purchaseTicket(seat);
     }
 
     @GetMapping("seats")
     public Theater getAllSeats(){
         return theater;
+    }
 
+    @PostMapping("/return")
+    public ResponseEntity<?> returnTicket(@RequestBody Map<String, String> tokenBody){
+        String token = tokenBody.get("token");
+
+        return seatDAO.returnTicket(token);
     }
 }

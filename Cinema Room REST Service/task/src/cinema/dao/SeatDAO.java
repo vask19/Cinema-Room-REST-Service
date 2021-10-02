@@ -1,17 +1,14 @@
 package cinema.dao;
 
 
-import cinema.entity.ErrorSeat;
-import cinema.entity.Seat;
-import cinema.entity.SeatInTheater;
-import cinema.entity.Theater;
-import cinema.exception.OutOfBoundsException;
+import cinema.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Map;
+import java.util.UUID;
 
 
 @Repository
@@ -30,8 +27,10 @@ public class SeatDAO {
                         "The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
             }
             else{
-                theater.getAvailableSeats().get(seatIndex).setIfPurchased(true);
-                SeatInTheater newSeat = theater.getAvailableSeats().get(seatIndex);
+                Ticket ticket = theater.getAvailableSeats().get(seatIndex);
+                ticket.setIfPurchased(true);
+                ticket.setToken(UUID.randomUUID());
+                TicketWithToken newSeat = new TicketWithToken(ticket.getToken(),ticket);
                 return new  ResponseEntity<Seat>(newSeat,HttpStatus.OK);
             }
         }
@@ -40,6 +39,22 @@ public class SeatDAO {
                     "The number of a row or a column is out of bounds!"
             ), HttpStatus.BAD_REQUEST);
         }
+
+    }
+
+
+    public ResponseEntity<?> returnTicket(String   token){
+        for (int i =0;i<theater.getAvailableSeats().size();i++){
+            Ticket ticket = theater.getAvailableSeats().get(i);
+            UUID ticketToken = ticket.getToken();
+            if (ticketToken == null) continue;
+            if (ticketToken.toString().equals(token)){
+                ticket.setToken(null);
+                ticket.setIfPurchased(false);
+                return new ResponseEntity<>(Map.of("returned_ticket", ticket), HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
 
     }
 

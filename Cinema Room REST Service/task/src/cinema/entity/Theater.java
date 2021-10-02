@@ -10,7 +10,7 @@ public class Theater {
 
     private int totalRows;
     private int totalColumns;
-    private List<SeatInTheater> availableSeats;
+    private List<Ticket> availableSeats;
 
 
 
@@ -20,7 +20,7 @@ public class Theater {
         availableSeats = new ArrayList<>();
         for (int i =0;i<totalRows;i++){
             for (int j = 0;j<totalColumns;j++){
-                SeatInTheater seat = new SeatInTheater(i+1,j+1);
+                Ticket seat = new Ticket(i+1,j+1);
                 if (i > 4 ) seat.setPrice(8);
                 else seat.setPrice(10);
                 availableSeats.add(seat);
@@ -44,11 +44,11 @@ public class Theater {
         this.totalColumns = totalColumns;
     }
 
-    public List<SeatInTheater> getAvailableSeats() {
+    public List<Ticket> getAvailableSeats() {
         return availableSeats;
     }
 
-    public void setAvailableSeats(List<SeatInTheater> availableSeats) {
+    public void setAvailableSeats(List<Ticket> availableSeats) {
         this.availableSeats = availableSeats;
     }
 }
