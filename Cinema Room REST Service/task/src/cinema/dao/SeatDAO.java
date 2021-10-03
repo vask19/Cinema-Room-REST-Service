@@ -31,6 +31,9 @@ public class SeatDAO {
                 ticket.setIfPurchased(true);
                 ticket.setToken(UUID.randomUUID());
                 TicketWithToken newSeat = new TicketWithToken(ticket.getToken(),ticket);
+                theater.setCurrentIncome(theater.getCurrentIncome() + ticket.getPrice());
+                theater.setNumberOfAvailableSeats(theater.getNumberOfAvailableSeats()-1);
+                theater.setNumberOfPurchasedTickets(theater.getNumberOfPurchasedTickets()+1);
                 return new  ResponseEntity<Seat>(newSeat,HttpStatus.OK);
             }
         }
@@ -51,11 +54,30 @@ public class SeatDAO {
             if (ticketToken.toString().equals(token)){
                 ticket.setToken(null);
                 ticket.setIfPurchased(false);
+                theater.setCurrentIncome(theater.getCurrentIncome() - ticket.getPrice());
+                theater.setNumberOfAvailableSeats(theater.getNumberOfAvailableSeats()+1);
+                theater.setNumberOfPurchasedTickets(theater.getNumberOfPurchasedTickets()-1);
                 return new ResponseEntity<>(Map.of("returned_ticket", ticket), HttpStatus.OK);
             }
         }
         return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
 
+    }
+
+    public ResponseEntity<?> getStats(String password){
+        if (password != null){
+            if (password.equals("super_secret")){
+                Map<String ,Long> map = Map.of(
+                        "current_income",theater.getCurrentIncome(),
+                        "number_of_available_seats",(long)theater.getNumberOfAvailableSeats(),
+                        "number_of_purchased_tickets",(long)theater.getNumberOfPurchasedTickets());
+
+                return new ResponseEntity<Map>(map, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>(Map.of("error", "The password is wrong!"),
+                HttpStatus.UNAUTHORIZED);
     }
 
 }

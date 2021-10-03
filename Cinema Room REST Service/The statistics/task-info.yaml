@@ -384,6 +384,397 @@ files:
         };
     }
   learner_created: false
+- name: src/cinema/dao/SeatDAO.java
+  visible: true
+  text: |
+    package cinema.dao;
+
+
+    import cinema.entity.*;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.stereotype.Repository;
+
+    import java.util.Map;
+    import java.util.UUID;
+
+
+    @Repository
+    public class SeatDAO {
+        @Autowired
+        private Theater theater;
+
+        public ResponseEntity<Seat> purchaseTicket(Seat seat){
+
+            if (theater.getAvailableSeats().contains(seat)) {
+
+                int seatIndex = theater.getAvailableSeats().indexOf(seat);
+
+                if (theater.getAvailableSeats().get(seatIndex).isIfPurchased()) {
+                    return new ResponseEntity<Seat>(new ErrorSeat(
+                            "The ticket has been already purchased!"), HttpStatus.BAD_REQUEST);
+                }
+                else{
+                    Ticket ticket = theater.getAvailableSeats().get(seatIndex);
+                    ticket.setIfPurchased(true);
+                    ticket.setToken(UUID.randomUUID());
+                    TicketWithToken newSeat = new TicketWithToken(ticket.getToken(),ticket);
+                    return new  ResponseEntity<Seat>(newSeat,HttpStatus.OK);
+                }
+            }
+            else {
+                return new ResponseEntity<Seat>(new ErrorSeat(
+                        "The number of a row or a column is out of bounds!"
+                ), HttpStatus.BAD_REQUEST);
+            }
+
+        }
+
+
+        public ResponseEntity<?> returnTicket(String   token){
+            for (int i =0;i<theater.getAvailableSeats().size();i++){
+                Ticket ticket = theater.getAvailableSeats().get(i);
+                UUID ticketToken = ticket.getToken();
+                if (ticketToken == null) continue;
+                if (ticketToken.toString().equals(token)){
+                    ticket.setToken(null);
+                    ticket.setIfPurchased(false);
+                    return new ResponseEntity<>(Map.of("returned_ticket", ticket), HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<>(Map.of("error", "Wrong token!"), HttpStatus.BAD_REQUEST);
+
+        }
+
+    }
+  learner_created: true
+- name: src/cinema/entity/ReturnedTicket.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    public class ReturnedTicket implements Seat{
+        private int row;
+        private int column;
+        private int price;
+
+        public ReturnedTicket() {
+        }
+
+        public ReturnedTicket(int row, int column, int price) {
+            this.row = row;
+            this.column = column;
+            this.price = price;
+        }
+        public ReturnedTicket(Ticket ticket){
+            this.row = ticket.getRow();
+            this.column = ticket.getColumn();
+            this.price = ticket.getPrice();
+        }
+
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+    }
+  learner_created: true
+- name: src/cinema/entity/ErrorSeat.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    public class ErrorSeat implements Seat{
+        private String error;
+
+        public ErrorSeat() {
+        }
+
+        public ErrorSeat(String error) {
+            this.error = error;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public void setError(String error) {
+            this.error = error;
+        }
+    }
+  learner_created: true
+- name: src/cinema/entity/Theater.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    import org.springframework.stereotype.Component;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+    @Component
+    public class Theater {
+
+        private int totalRows;
+        private int totalColumns;
+        private List<Ticket> availableSeats;
+
+
+
+        public Theater() {
+            this.totalRows = 9;
+            this.totalColumns = 9;
+            availableSeats = new ArrayList<>();
+            for (int i =0;i<totalRows;i++){
+                for (int j = 0;j<totalColumns;j++){
+                    Ticket seat = new Ticket(i+1,j+1);
+                    if (i > 4 ) seat.setPrice(8);
+                    else seat.setPrice(10);
+                    availableSeats.add(seat);
+                }
+            }
+        }
+
+        public int getTotalRows() {
+            return totalRows;
+        }
+
+        public void setTotalRows(int totalRows) {
+            this.totalRows = totalRows;
+        }
+
+        public int getTotalColumns() {
+            return totalColumns;
+        }
+
+        public void setTotalColumns(int totalColumns) {
+            this.totalColumns = totalColumns;
+        }
+
+        public List<Ticket> getAvailableSeats() {
+            return availableSeats;
+        }
+
+        public void setAvailableSeats(List<Ticket> availableSeats) {
+            this.availableSeats = availableSeats;
+        }
+    }
+  learner_created: true
+- name: src/cinema/entity/TicketWithToken.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    import java.util.UUID;
+
+    public class TicketWithToken implements Seat{
+        private UUID token;
+        private Ticket ticket;
+
+        public TicketWithToken(UUID token, Ticket ticket) {
+            this.token = token;
+            this.ticket = ticket;
+        }
+
+        public TicketWithToken() {
+        }
+
+        public UUID getToken() {
+            return token;
+        }
+
+        public void setToken(UUID token) {
+            this.token = token;
+        }
+
+        public Ticket getTicket() {
+            return ticket;
+        }
+
+        public void setTicket(Ticket ticket) {
+            this.ticket = ticket;
+        }
+    }
+  learner_created: true
+- name: src/cinema/Controller.java
+  visible: true
+  text: |
+    package cinema;
+
+    import cinema.dao.SeatDAO;
+    import cinema.entity.Seat;
+    import cinema.entity.Ticket;
+    import cinema.entity.Theater;
+    import com.fasterxml.jackson.databind.util.JSONPObject;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
+
+    import java.util.Map;
+    import java.util.UUID;
+
+
+    @RestController
+    public class Controller {
+        @Autowired
+        private Theater theater;
+
+        @Autowired
+        private SeatDAO seatDAO;
+
+
+        @PostMapping("purchase")
+        public ResponseEntity<Seat> purchaseTicket(@RequestBody Ticket seat){
+            return seatDAO.purchaseTicket(seat);
+        }
+
+        @GetMapping("seats")
+        public Theater getAllSeats(){
+            return theater;
+        }
+
+        @PostMapping("/return")
+        public ResponseEntity<?> returnTicket(@RequestBody Map<String, String> tokenBody){
+            String token = tokenBody.get("token");
+
+            return seatDAO.returnTicket(token);
+        }
+    }
+  learner_created: true
+- name: src/cinema/entity/Seat.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    public interface Seat {
+    }
+  learner_created: true
+- name: src/cinema/exception/OutOfBoundsException.java
+  visible: true
+  text: |
+    package cinema.exception;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.web.bind.annotation.ResponseStatus;
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public class OutOfBoundsException extends RuntimeException{
+
+
+        public OutOfBoundsException(String cause){
+            super(cause);
+        }
+    }
+  learner_created: true
+- name: src/cinema/entity/Ticket.java
+  visible: true
+  text: |
+    package cinema.entity;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+
+    import java.util.Objects;
+    import java.util.UUID;
+
+    public class Ticket implements Seat {
+        private int row;
+        private int column;
+        private int price;
+        @JsonIgnore
+        private UUID token;
+        @JsonIgnore
+        private boolean ifPurchased;
+
+        public Ticket() {
+        }
+
+        public Ticket(int row, int column) {
+            this.row = row;
+            this.column = column;
+            ifPurchased = false;
+
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public int getColumn() {
+            return column;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+
+        public boolean isIfPurchased() {
+            return ifPurchased;
+        }
+
+        public void setIfPurchased(boolean ifPurchased) {
+            this.ifPurchased = ifPurchased;
+        }
+
+        public UUID getToken() {
+            return token;
+        }
+
+        public void setToken(UUID token) {
+            this.token = token;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Ticket seat = (Ticket) o;
+            return row == seat.row && column == seat.column;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(row, column);
+        }
+
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/189/stages/948/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Sat, 02 Oct 2021 14:10:33 UTC
 record: -1
